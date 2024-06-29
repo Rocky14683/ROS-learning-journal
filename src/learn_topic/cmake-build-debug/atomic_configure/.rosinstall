@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/rockychen/ros_ws/src/learn_topic/cmake-build-debug/devel/setup.sh
