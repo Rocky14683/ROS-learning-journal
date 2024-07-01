@@ -3,6 +3,6 @@ prefix=/home/rockychen/ros_ws/src/learn_service/cmake-build-debug/devel
 Name: learn_service
 Description: Description of learn_service
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/rockychen/ros_ws/src/learn_service/cmake-build-debug/devel/include
 Libs: -L${prefix}/lib 
 Requires: 

@@ -13,7 +13,11 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   turtlesim
+  message_generation
 )
+
+add_message_files(FILES Information.msg)
+generate_messages(DEPENDENCIES std_msgs)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -213,3 +217,7 @@ target_link_libraries(turtle_pose_subscriber ${catkin_LIBRARIES})
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
+add_executable(Information_publisher src/Information_publisher.cpp)
+target_link_libraries(Information_publisher ${catkin_LIBRARIES})
+add_executable(Information_subscriber src/Information_subscriber.cpp)
+target_link_libraries(Information_subscriber ${catkin_LIBRARIES})

@@ -8,12 +8,16 @@ project(learn_service)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
-  roscpp
-  rospy
-  std_msgs
-  turtlesim
+        geometry_msgs
+        roscpp
+        rospy
+        std_msgs
+        turtlesim
+        message_generation
 )
+
+add_service_files(FILES IntPlus.srv)
+generate_messages(DEPENDENCIES std_msgs)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -105,10 +109,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES learn_service
-#  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs turtlesim
-#  DEPENDS system_lib
+        #  INCLUDE_DIRS include
+        #  LIBRARIES learn_service
+        #  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs turtlesim
+        #  DEPENDS system_lib
 )
 
 ###########
@@ -118,8 +122,8 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
+        # include
+        ${catkin_INCLUDE_DIRS}
 )
 
 
@@ -212,3 +216,9 @@ target_link_libraries(turtle_vel_command_server ${catkin_LIBRARIES})
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+add_executable(IntPlus_client src/IntPlus_client.cpp)
+target_link_libraries(IntPlus_client ${catkin_LIBRARIES})
+add_dependencies(IntPlus_client ${PROJECT_NAME}_generate_messages_cpp)
+add_executable(IntPlus_server src/IntPlus_server.cpp)
+target_link_libraries(IntPlus_server ${catkin_LIBRARIES})
+add_dependencies(IntPlus_server ${PROJECT_NAME}_generate_messages_cpp)
